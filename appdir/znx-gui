@@ -78,6 +78,13 @@ notify () {
 		--passivepopup "$@" 5
 }
 
+as_root () {
+	kdialog \
+		--style $STYLE \
+		--title $TITLE \
+		--password "Password:" | sudo -Sk $@
+}
+
 
 # -- Loop until the user closes the main window.
 
@@ -97,26 +104,12 @@ while :; do
 
 	# -- Check if the device has been initialized.
 
-	for d in $DEVICE*; do
-
-		q=
-
-		blkid $d | grep -q ZNX_DATA && {
-			q=$d
-			break
-		}
-
-	done
-
-	[ ${#q} -eq 0 ] && {
-
-		# -- The device isn't initialized.
+	blkid $DEVICE* | grep -q ZNX_DATA || {
 
 		ask_for_device_initialization &&
-			ZNX_ARGS="init $DEVICE" ||
-			continue
+			COMMAND=init
 
-	} || {
+	} && {
 
 		# -- The device is initialized. Show the available images.
 
@@ -152,9 +145,9 @@ while :; do
 
 	# -- Run the desired command.
 
-	notify "Please wait until the command finishes. You'll be notified."
+	notify "Please wait. You will be notified the command finishes."
 
-	pkexec znx $COMMAND $DEVICE $IMAGE $URL &&
+	as_root znx $COMMAND $DEVICE $IMAGE $URL &&
 		notify "Operation completed with success." ||
 		notify "Operation failed!"
 
