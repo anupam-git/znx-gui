@@ -14,38 +14,9 @@ chmod +x copier
 chmod +x appdir/znx-gui
 
 
-# -- Write the commit that generated this build.
-
-sed -i "s/@TRAVIS_COMMIT@/${1:0:7}/" appdir/znx-gui
-
-
 # -- Populate appdir.
 
 mkdir -p appdir/bin
-
-printf \
-'[Desktop Entry]
-Type=Application
-Name=znx-gui
-Exec=znx-gui
-Icon=znx-gui
-Comment="Graphical frontend for znx."
-Terminal=false
-Categories=Utility;
-' > appdir/znx-gui.desktop
-
-
-# -- Create a wrapper script.
-
-printf \
-'#! /bin/sh
-
-export LD_LIBRARY_PATH=$APPDIR/usr/lib:$LD_LIBRARY_PATH
-export PATH=$PATH:$APPDIR/bin:$APPDIR/sbin:$APPDIR/usr/bin:$APPDIR/usr/sbin
-exec $APPDIR/znx-gui
-' > appdir/AppRun
-
-chmod a+x appdir/AppRun
 
 
 # -- Install busybox.

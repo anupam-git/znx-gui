@@ -1,0 +1,5 @@
+#! /bin/sh
+
+export LD_LIBRARY_PATH=$APPDIR/usr/lib:$LD_LIBRARY_PATH
+export PATH=$PATH:$APPDIR/bin:$APPDIR/sbin:$APPDIR/usr/bin:$APPDIR/usr/sbin
+exec $APPDIR/znx-gui
