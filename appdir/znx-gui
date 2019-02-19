@@ -28,14 +28,14 @@ get_image () { ui --inputbox "Image name:"; }
 
 # -- Wrappers for znx's commands.
 
-_znx_gui_init () { as_root ./znx init $DEVICE; }
-_znx_gui_restore-esp () { as_root ./znx restore-esp $DEVICE; }
-_znx_gui_deploy () { as_root ./znx deploy $DEVICE $(get_image) $(get_url); }
-_znx_gui_update () { as_root ./znx update $DEVICE $(select_image); }
-_znx_gui_revert () { as_root ./znx revert $DEVICE $(select_image); }
-_znx_gui_remove () { as_root ./znx remove $DEVICE $(select_image); }
-_znx_gui_clean () { as_root ./znx clean $DEVICE $(select_image); }
-_znx_gui_reset () { as_root ./znx reset $DEVICE $(select_image); }
+_znx_gui_init () { as_root znx init $DEVICE; }
+_znx_gui_restore-esp () { as_root znx restore-esp $DEVICE; }
+_znx_gui_deploy () { as_root znx deploy $DEVICE $(get_image) $(get_url); }
+_znx_gui_update () { as_root znx update $DEVICE $(select_image); }
+_znx_gui_revert () { as_root znx revert $DEVICE $(select_image); }
+_znx_gui_remove () { as_root znx remove $DEVICE $(select_image); }
+_znx_gui_clean () { as_root znx clean $DEVICE $(select_image); }
+_znx_gui_reset () { as_root znx reset $DEVICE $(select_image); }
 
 _znx_gui_stats () {
 	TMP_FILE=$(mktemp)
