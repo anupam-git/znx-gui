@@ -3,8 +3,8 @@
 # -- Install dependencies.
 
 apt-get -qq -y update > /dev/null
-apt-get -qq -y install wget patchelf file libcairo2 git --no-install-recommends > /dev/null
-apt-get -qq -y install busybox-static kde-baseapps-bin --no-install-recommends > /dev/null
+apt-get -qq -y install wget patchelf file libcairo2 git
+apt-get -qq -y install busybox-static kdialog
 
 wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
 wget -q https://raw.githubusercontent.com/luis-lavaire/bin/master/copier
