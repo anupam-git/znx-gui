@@ -14,7 +14,7 @@ set -x
 alias ui="kdialog --title='$TITLE'"
 
 error () { ui --error "$@"; exit 1; }
-notify () { ui --passivepopup "$@" 5; }
+notify () { ui --passivepopup "$@" 5 &; }
 ask () { ui --yesno "$@"; }
 as_root () { ui --password "Password:" | sudo -Sk $@; }
 
@@ -58,7 +58,7 @@ while :; do
 
     DEVICE=$(select_device)
 
-    notify "Please wait. You will be notified when the command finishes." &
+    notify "Please wait. You will be notified when the command finishes."
 
     _znx_gui_$COMMAND &&
         notify "Operation completed successfully." ||
