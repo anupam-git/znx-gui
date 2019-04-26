@@ -1,5 +1,7 @@
 #! /bin/sh
 
+set -x
+
 # -- Install dependencies.
 
 apt-get -qq -y update > /dev/null
