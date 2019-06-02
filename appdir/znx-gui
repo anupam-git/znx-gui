@@ -14,7 +14,7 @@ set -x
 alias ui="kdialog --title='$TITLE'"
 
 error () { ui --error "$@"; exit 1; }
-notify () { ui --passivepopup "$@" 5 &; }
+notify () { ui --passivepopup "$@" 5; }
 ask () { ui --yesno "$@"; }
 as_root () { ui --password "Password:" | sudo -Sk $@; }
 
@@ -31,7 +31,7 @@ get_image () { ui --inputbox "Image name:"; }
 # -- Wrappers for znx's commands.
 
 _znx_gui_init () { as_root znx init $DEVICE; }
-_znx_gui_restore_esp () { as_root znx restore-esp $DEVICE; }
+_znx_gui_restore () { as_root znx restore $DEVICE; }
 _znx_gui_deploy () { as_root znx deploy $DEVICE $(get_image) $(eval echo $(get_url)); }
 _znx_gui_update () { as_root znx update $DEVICE $(select_image); }
 _znx_gui_revert () { as_root znx revert $DEVICE $(select_image); }
@@ -58,7 +58,7 @@ while :; do
 
     DEVICE=$(select_device)
 
-    notify "Please wait. You will be notified when the command finishes."
+    notify "Please wait. You will be notified when the command finishes." &
 
     _znx_gui_$COMMAND &&
         notify "Operation completed successfully." ||

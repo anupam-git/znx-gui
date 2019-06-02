@@ -2,6 +2,11 @@
 
 set -x
 
+# -- Variables passed by the docker command.
+
+TRAVIS_COMMIT=$1
+TRAVIS_BRANCH=$2
+
 # -- Install dependencies.
 
 apt-get -qq -y update > /dev/null
@@ -9,11 +14,15 @@ apt-get -qq -y install wget patchelf file libcairo2 git > /dev/null
 apt-get -qq -y install busybox-static kde-baseapps-bin > /dev/null
 
 wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
-wget -q https://raw.githubusercontent.com/luis-lavaire/bin/master/copier
+wget -q https://gitlab.com/nitrux/tools/raw/master/copier
 
 chmod +x appimagetool
 chmod +x copier
 chmod +x appdir/znx-gui
+
+# -- Write the commit that generated this build.
+
+sed -i "s/@TRAVIS_COMMIT@/${TRAVIS_COMMIT:0:7}/" appdir/znx-gui
 
 
 # -- Populate appdir.
@@ -76,5 +85,7 @@ cp -r $ZNX_TMP_DIR/appdir .
 wget -q https://raw.githubusercontent.com/Nitrux/appimage-wrapper/master/appimage-wrapper
 chmod a+x appimage-wrapper
 
+UPDATE_URL="zsync|https://github.com/Nitrux/znx-gui/releases/download/continuous-development/znx-gui_$TRAVIS_BRANCH-x86_64.AppImage"
+
 mkdir out
-ARCH=x84_64 ./appimage-wrapper appimagetool appdir out/znx-gui
+ARCH=x84_64 ./appimage-wrapper appimagetool -u "$UPDATE_URL" appdir out/znx-gui_$TRAVIS_BRANCH-x86_64.AppImage
