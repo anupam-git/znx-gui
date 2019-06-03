@@ -11,7 +11,7 @@ TRAVIS_BRANCH=$2
 
 apt-get -qq -y update > /dev/null
 apt-get -qq -y install wget patchelf file libcairo2 git > /dev/null
-apt-get -qq -y install busybox-static kdialog > /dev/null
+apt-get -qq -y install busybox-static kdialog libqt5gui5> /dev/null
 
 wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
 wget -q https://gitlab.com/nitrux/tools/raw/master/copier
