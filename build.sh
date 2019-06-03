@@ -39,6 +39,8 @@ mkdir -p appdir/bin
 # -- Copy binaries and its dependencies to appdir.
 
 ./copier kdialog appdir
+./copier libqtdbus4 appdir
+
 
 # -- Include znx.
 
