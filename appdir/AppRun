@@ -2,4 +2,4 @@
 
 export LD_LIBRARY_PATH=$APPDIR/usr/lib:$LD_LIBRARY_PATH
 export PATH=$APPDIR/bin:$APPDIR/sbin:$APPDIR/usr/bin:$APPDIR/usr/sbin:$PATH
-exec $APPDIR/znx-gui
+exec $APPDIR/znx-gui $@
