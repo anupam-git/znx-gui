@@ -18,7 +18,7 @@ notify () { ui --passivepopup "$@" 5; }
 ask () { ui --yesno "$@"; }
 as_root () { ui --password "Password:" | sudo -Sk $@; }
 
-CMDS="init restore-esp deploy update revert remove clean reset stats"
+CMDS="init restore deploy update revert remove clean reset stats"
 
 select_command () { ui --combobox "Command to run:" $CMDS; }
 select_device () { ui --combobox "Device:" $(lsblk -npdlo NAME); }
