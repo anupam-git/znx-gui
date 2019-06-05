@@ -1,6 +1,6 @@
 sudo: required
 script:
-- sudo docker run --rm -v $(pwd)/:/build/ -w /build/ ubuntu:bionic /bin/bash build.sh
+- sudo docker run --rm -v $(pwd)/:/build/ -w /build/ ubuntu:xenial /bin/bash build.sh
     $TRAVIS_COMMIT $TRAVIS_BRANCH
 after_success:
 - wget -q https://github.com/probonopd/uploadtool/raw/master/upload.sh
